@@ -1,10 +1,10 @@
 package com.huawei.charging.ut;
 
 
-import com.huawei.charging.domain.charge.chargeplan.BasicChargePlan;
-import com.huawei.charging.domain.charge.chargeplan.ChargePlan;
+import com.huawei.charging.domain.charge.chargeplan.BasicAbstractChargePlan;
+import com.huawei.charging.domain.charge.chargeplan.AbstractChargePlan;
 import com.huawei.charging.domain.charge.chargeplan.ChargePlanType;
-import com.huawei.charging.domain.charge.chargeplan.FamilyChargePlan;
+import com.huawei.charging.domain.charge.chargeplan.FamilyAbstractChargePlan;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -16,18 +16,18 @@ public class ChargeRecordPlanTest {
 
     @Test
     public void test_priority(){
-        ChargePlan basicChargePlan = new BasicChargePlan();
-        ChargePlan familyChargePlan = new FamilyChargePlan();
-        ChargePlan fixedTimeChargePlan = new FamilyChargePlan();
-        List<ChargePlan> chargePlanList =  new ArrayList<>();
-        chargePlanList.add(basicChargePlan);
-        chargePlanList.add(familyChargePlan);
-        chargePlanList.add(fixedTimeChargePlan);
+        AbstractChargePlan basicAbstractChargePlan = new BasicAbstractChargePlan();
+        AbstractChargePlan familyAbstractChargePlan = new FamilyAbstractChargePlan();
+        AbstractChargePlan fixedTimeAbstractChargePlan = new FamilyAbstractChargePlan();
+        List<AbstractChargePlan> abstractChargePlanList =  new ArrayList<>();
+        abstractChargePlanList.add(basicAbstractChargePlan);
+        abstractChargePlanList.add(familyAbstractChargePlan);
+        abstractChargePlanList.add(fixedTimeAbstractChargePlan);
 
-        Collections.sort(chargePlanList);
+        Collections.sort(abstractChargePlanList);
 
-        System.out.println(chargePlanList.get(0));
-        Assert.assertEquals(ChargePlanType.FAMILY, chargePlanList.get(0).getType());
+        System.out.println(abstractChargePlanList.get(0));
+        Assert.assertEquals(ChargePlanType.FAMILY, abstractChargePlanList.get(0).getType());
 
     }
 }

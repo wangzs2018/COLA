@@ -6,10 +6,10 @@ import com.huawei.charging.domain.charge.CallType;
 import com.huawei.charging.domain.charge.ChargeRecord;
 import com.huawei.charging.domain.charge.ChargeContext;
 import com.huawei.charging.domain.charge.Money;
-import com.huawei.charging.domain.charge.chargeplan.BasicChargePlan;
-import com.huawei.charging.domain.charge.chargeplan.ChargePlan;
-import com.huawei.charging.domain.charge.chargeplan.FamilyChargePlan;
-import com.huawei.charging.domain.charge.chargeplan.FixedTimeChangePlan;
+import com.huawei.charging.domain.charge.chargeplan.BasicAbstractChargePlan;
+import com.huawei.charging.domain.charge.chargeplan.AbstractChargePlan;
+import com.huawei.charging.domain.charge.chargeplan.FamilyAbstractChargePlan;
+import com.huawei.charging.domain.charge.chargeplan.FixedTimeChangePlanAbstract;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,11 +26,11 @@ public class CompositeChargeRuleTestRecord {
     @Test
     public void test_basic_and_fixedTime_charge_rule(){
         // prepare
-        List<ChargePlan> chargePlanList = new ArrayList<>();
-        chargePlanList.add(new BasicChargePlan());
-        chargePlanList.add(new FixedTimeChangePlan());
+        List<AbstractChargePlan> abstractChargePlanList = new ArrayList<>();
+        abstractChargePlanList.add(new BasicAbstractChargePlan());
+        abstractChargePlanList.add(new FixedTimeChangePlanAbstract());
         Account account = Account.valueOf(13681874561L, Money.of(200)); // for spring bean
-        account.setChargePlanList(chargePlanList);
+        account.setAbstractChargePlanList(abstractChargePlanList);
         ChargeContext ctx = new ChargeContext(CallType.CALLING, 13681874561L, 15921582125L, 220);
         ctx.account = account;
 
@@ -44,11 +44,11 @@ public class CompositeChargeRuleTestRecord {
     @Test
     public void test_basic_and_family_charge_rule(){
         // prepare
-        List<ChargePlan> chargePlanList = new ArrayList<>();
-        chargePlanList.add(new BasicChargePlan());
-        chargePlanList.add(new FamilyChargePlan());
+        List<AbstractChargePlan> abstractChargePlanList = new ArrayList<>();
+        abstractChargePlanList.add(new BasicAbstractChargePlan());
+        abstractChargePlanList.add(new FamilyAbstractChargePlan());
         Account account = Account.valueOf(13681874561L, Money.of(200)); // for spring bean
-        account.setChargePlanList(chargePlanList);
+        account.setAbstractChargePlanList(abstractChargePlanList);
         ChargeContext ctx = new ChargeContext(CallType.CALLING, 13681874561L, 15921582125L, 220);
         ctx.account = account;
 
@@ -62,12 +62,12 @@ public class CompositeChargeRuleTestRecord {
     @Test
     public void test_all_charge_rule(){
         // prepare
-        List<ChargePlan> chargePlanList = new ArrayList<>();
-        chargePlanList.add(new BasicChargePlan());
-        chargePlanList.add(new FamilyChargePlan());
-        chargePlanList.add(new FixedTimeChangePlan());
+        List<AbstractChargePlan> abstractChargePlanList = new ArrayList<>();
+        abstractChargePlanList.add(new BasicAbstractChargePlan());
+        abstractChargePlanList.add(new FamilyAbstractChargePlan());
+        abstractChargePlanList.add(new FixedTimeChangePlanAbstract());
         Account account = Account.valueOf(13681874561L, Money.of(200)); // for spring bean
-        account.setChargePlanList(chargePlanList);
+        account.setAbstractChargePlanList(abstractChargePlanList);
         ChargeContext ctx = new ChargeContext(CallType.CALLING, 13681874561L, 15921582125L, 220);
         ctx.account = account;
 

@@ -4,8 +4,8 @@ import com.huawei.charging.domain.BizException;
 import com.huawei.charging.domain.DomainFactory;
 import com.huawei.charging.domain.Entity;
 import com.huawei.charging.domain.charge.*;
-import com.huawei.charging.domain.charge.chargeplan.BasicChargePlan;
-import com.huawei.charging.domain.charge.chargeplan.ChargePlan;
+import com.huawei.charging.domain.charge.chargeplan.BasicAbstractChargePlan;
+import com.huawei.charging.domain.charge.chargeplan.AbstractChargePlan;
 import com.huawei.charging.domain.charge.chargerule.ChargeRuleFactory;
 import com.huawei.charging.domain.charge.chargerule.CompositeChargeRule;
 import com.huawei.charging.domain.gateway.AccountGateway;
@@ -37,7 +37,7 @@ public class Account {
     /**
      * 账户所拥有的套餐
      */
-    private List<ChargePlan> chargePlanList = new ArrayList<>();;
+    private List<AbstractChargePlan> abstractChargePlanList = new ArrayList<>();;
 
     @Resource
     private AccountGateway accountGateway;
@@ -47,17 +47,17 @@ public class Account {
 
     }
 
-    public Account(long phoneNo, Money amount, List<ChargePlan> chargePlanList){
+    public Account(long phoneNo, Money amount, List<AbstractChargePlan> abstractChargePlanList){
         this.phoneNo = phoneNo;
         this.remaining = amount;
-        this.chargePlanList = chargePlanList;
+        this.abstractChargePlanList = abstractChargePlanList;
     }
 
     public static Account valueOf(long phoneNo, Money amount) {
         Account account = DomainFactory.get(Account.class);
         account.setPhoneNo(phoneNo);
         account.setRemaining(amount);
-        account.chargePlanList.add(new BasicChargePlan());
+        account.abstractChargePlanList.add(new BasicAbstractChargePlan());
         return account;
     }
 
@@ -77,7 +77,7 @@ public class Account {
      * @return 计费记录列表
      */
     public List<ChargeRecord> charge(ChargeContext ctx) {
-        CompositeChargeRule compositeChargeRule = ChargeRuleFactory.get(chargePlanList);
+        CompositeChargeRule compositeChargeRule = ChargeRuleFactory.get(abstractChargePlanList);
         List<ChargeRecord> chargeRecords = compositeChargeRule.doCharge(ctx);
         log.debug("Charges: "+ chargeRecords);
 
@@ -91,7 +91,7 @@ public class Account {
         return "Account{" +
                 "phoneNo=" + phoneNo +
                 ", remaining=" + remaining +
-                ", chargePlanList=" + chargePlanList +
+                ", chargePlanList=" + abstractChargePlanList +
                 '}';
     }
 }

@@ -4,7 +4,7 @@ import com.huawei.charging.domain.charge.ChargeRecord;
 import com.huawei.charging.domain.charge.ChargeContext;
 import com.huawei.charging.domain.charge.Money;
 import com.huawei.charging.domain.charge.chargeplan.ChargePlanType;
-import com.huawei.charging.domain.charge.chargeplan.FixedTimeChangePlan;
+import com.huawei.charging.domain.charge.chargeplan.FixedTimeChangePlanAbstract;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -17,8 +17,8 @@ public class FixedTimeChargeRule extends AbstractChargeRule {
             log.debug("No need charge for : "+ctx);
             return null;
         }
-        FixedTimeChangePlan fixedTimeChangePlan = (FixedTimeChangePlan) chargePlan;
-        FixedTimeChangePlan.FreeCallTime freeCallTime = fixedTimeChangePlan.getResource();
+        FixedTimeChangePlanAbstract fixedTimeChangePlan = (FixedTimeChangePlanAbstract) abstractChargePlan;
+        FixedTimeChangePlanAbstract.FreeCallTime freeCallTime = fixedTimeChangePlan.getResource();
         if (ctx.isCalling() && freeCallTime.isCallingTimeRemaining()) {
             int leftDuration = freeCallTime.chargeFreeCallingTime(ctx.durationToCharge);
             log.debug("Calling Left Duration after FixedTimeCharge : " + leftDuration);

@@ -1,7 +1,7 @@
 package com.huawei.charging.domain.charge.chargerule;
 
 import com.huawei.charging.domain.charge.*;
-import com.huawei.charging.domain.charge.chargeplan.BasicChargePlan;
+import com.huawei.charging.domain.charge.chargeplan.BasicAbstractChargePlan;
 import com.huawei.charging.domain.charge.chargeplan.ChargePlanType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -15,8 +15,8 @@ public class BasicChargeRule extends AbstractChargeRule{
             log.debug("No need charge for : "+ctx);
             return null;
         }
-        BasicChargePlan basicChargePlan = (BasicChargePlan)chargePlan;
-        BasicChargePlan.BasicChargeFee chargeFee = basicChargePlan.getResource();
+        BasicAbstractChargePlan basicChargePlan = (BasicAbstractChargePlan) abstractChargePlan;
+        BasicAbstractChargePlan.BasicChargeFee chargeFee = basicChargePlan.getResource();
         Money cost;
         int duration = ctx.durationToCharge;
         if (ctx.callType == CallType.CALLING) {

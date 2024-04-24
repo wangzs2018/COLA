@@ -4,34 +4,32 @@ import com.huawei.charging.domain.account.Account;
 import com.huawei.charging.domain.charge.CallType;
 import com.huawei.charging.domain.charge.ChargeContext;
 import com.huawei.charging.domain.charge.Money;
-import com.huawei.charging.domain.charge.chargeplan.BasicChargePlan;
-import com.huawei.charging.domain.charge.chargeplan.ChargePlan;
-import com.huawei.charging.domain.charge.chargeplan.FamilyChargePlan;
-import com.huawei.charging.domain.charge.chargeplan.FixedTimeChangePlan;
+import com.huawei.charging.domain.charge.chargeplan.BasicAbstractChargePlan;
+import com.huawei.charging.domain.charge.chargeplan.AbstractChargePlan;
+import com.huawei.charging.domain.charge.chargeplan.FamilyAbstractChargePlan;
+import com.huawei.charging.domain.charge.chargeplan.FixedTimeChangePlanAbstract;
 import com.huawei.charging.domain.charge.chargerule.BasicChargeRule;
 import com.huawei.charging.domain.charge.chargerule.FamilyChargeRule;
 import com.huawei.charging.domain.charge.chargerule.FixedTimeChargeRule;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class ChargeRecordRuleTest {
 
     @Test
     public void test_basic_charge_rule(){
         //prepare
-        ChargePlan chargePlan = new BasicChargePlan();
-        Account account = new Account(13681874561L, Money.of(200), Collections.singletonList(chargePlan));
+        AbstractChargePlan abstractChargePlan = new BasicAbstractChargePlan();
+        Account account = new Account(13681874561L, Money.of(200), Collections.singletonList(abstractChargePlan));
         ChargeContext ctx = new ChargeContext(CallType.CALLING, 13681874561L, 15921582125L, 20);
         ctx.account = account;
         System.out.println("Account before charge: "+ account);
 
         //do
         BasicChargeRule basicChargeRule = new BasicChargeRule();
-        basicChargeRule.belongsTo(chargePlan);
+        basicChargeRule.belongsTo(abstractChargePlan);
         basicChargeRule.doCharge(ctx);
 
         //check
@@ -43,7 +41,7 @@ public class ChargeRecordRuleTest {
     @Test
     public void test_family_charge_rule(){
         //prepare
-        FamilyChargePlan chargePlan = new FamilyChargePlan();
+        FamilyAbstractChargePlan chargePlan = new FamilyAbstractChargePlan();
         Account account = new Account(13681874561L, Money.of(200), Collections.singletonList(chargePlan));
         ChargeContext ctx = new ChargeContext(CallType.CALLING, 13681874561L, 15921582125L, 20);
         ctx.account = account;
@@ -63,7 +61,7 @@ public class ChargeRecordRuleTest {
     @Test
     public void test_fixed_time_charge_rule(){
         //prepare
-        FixedTimeChangePlan chargePlan = new FixedTimeChangePlan();
+        FixedTimeChangePlanAbstract chargePlan = new FixedTimeChangePlanAbstract();
         Account account = new Account(13681874561L, Money.of(200), Collections.singletonList(chargePlan));
         ChargeContext ctx = new ChargeContext(CallType.CALLING, 13681874561L, 15921582125L, 180);
         ctx.account = account;
@@ -87,7 +85,7 @@ public class ChargeRecordRuleTest {
         Assert.assertEquals( 20, ctx2.getDurationToCharge());
 
         //reset fixed time
-        FixedTimeChangePlan.FreeCallTime.FREE_CALLED_TIME = 200;
-        FixedTimeChangePlan.FreeCallTime.FREE_CALLING_TIME = 200;
+        FixedTimeChangePlanAbstract.FreeCallTime.FREE_CALLED_TIME = 200;
+        FixedTimeChangePlanAbstract.FreeCallTime.FREE_CALLING_TIME = 200;
     }
 }
