@@ -12,6 +12,10 @@ public class AccountDomainService {
     @Resource
     private AccountGateway accountGateway;
 
+    /**
+     * 判断通话是否可以开始
+     * @param session
+     */
     public void canSessionStart(Session session){
         Account callingAccount = accountGateway.getAccount(session.getCallingPhoneNo());
         Account calledAccount = accountGateway.getAccount(session.getCalledPhoneNo());

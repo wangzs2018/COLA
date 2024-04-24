@@ -1,5 +1,8 @@
 package com.huawei.charging.domain.charge.chargeplan;
 
+/**
+ * 固定时长套餐
+ */
 public class FixedTimeChangePlan extends ChargePlan<FixedTimeChangePlan.FreeCallTime>{
 
     public FixedTimeChangePlan() {
@@ -20,12 +23,17 @@ public class FixedTimeChangePlan extends ChargePlan<FixedTimeChangePlan.FreeCall
         public static int FREE_CALLING_TIME = 200;
         public static int FREE_CALLED_TIME = 200;
 
+        /**
+         * 判断是否还有剩余的免费通话时间
+         *
+         * @return 如果剩余免费通话时间大于0，则返回true；否则返回false
+         */
         public boolean isCallingTimeRemaining(){
             return FREE_CALLING_TIME > 0;
         }
 
         /**
-         * 扣减固定时长套餐的费用
+         * 主叫-扣减固定时长套餐的费用
          * @param duration 扣减时长
          * @return 剩余还需要扣减的时长
          */
@@ -41,12 +49,17 @@ public class FixedTimeChangePlan extends ChargePlan<FixedTimeChangePlan.FreeCall
             }
         }
 
+        /**
+         * 判断是否还有剩余的免费被叫时间
+         *
+         * @return 如果剩余免费被叫时间大于0，则返回true；否则返回false
+         */
         public boolean isCalledTimeRemaining(){
             return FREE_CALLED_TIME > 0;
         }
 
         /**
-         * 扣减固定时长套餐的费用
+         * 被叫-扣减固定时长套餐的费用
          * @param duration 扣减时长
          * @return 剩余还需要扣减的时长
          */

@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * 计费规则工厂类
+ */
 public class ChargeRuleFactory {
     public static CompositeChargeRule get(List<ChargePlan> chargePlanList) {
         //按套餐的优先级进行排序

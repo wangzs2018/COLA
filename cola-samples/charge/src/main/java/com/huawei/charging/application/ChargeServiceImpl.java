@@ -36,6 +36,7 @@ public class ChargeServiceImpl implements ChargeServiceI {
     @Override
     public Response begin(BeginSessionRequest request) {
         Session session = request.toSession();
+        // 判断是否可以开始通话
         accountDomainService.canSessionStart(session);
         sessionGateway.create(session);
         log.debug("Session created successfully :" + session);
@@ -55,6 +56,13 @@ public class ChargeServiceImpl implements ChargeServiceI {
         return Response.buildSuccess();
     }
 
+    /**
+     * 对主叫号码进行计费
+     *
+     * @param session 通话对象
+     * @param durationToCharge 计费时长
+     * @param chargeRecordList 计费记录列表
+     */
     private void chargeCalling(Session session, int durationToCharge, List<ChargeRecord> chargeRecordList) {
         Account callingAccount = accountGateway.getAccount(session.getCallingPhoneNo());
         ChargeContext callingCtx = new ChargeContext(CallType.CALLING, session.getCallingPhoneNo(), session.getCalledPhoneNo(), durationToCharge);
@@ -63,6 +71,13 @@ public class ChargeServiceImpl implements ChargeServiceI {
         chargeRecordList.addAll(callingAccount.charge(callingCtx));
     }
 
+    /**
+     * 对被叫号码进行计费
+     *
+     * @param session 通话对象
+     * @param durationToCharge 计费时长
+     * @param chargeRecordList 计费记录列表
+     */
     private void chargeCalled(Session session, int durationToCharge, List<ChargeRecord> chargeRecordList) {
         Account calledAccount = accountGateway.getAccount(session.getCalledPhoneNo());
         ChargeContext calledCtx = new ChargeContext(CallType.CALLED, session.getCalledPhoneNo(), session.getCallingPhoneNo(), durationToCharge);

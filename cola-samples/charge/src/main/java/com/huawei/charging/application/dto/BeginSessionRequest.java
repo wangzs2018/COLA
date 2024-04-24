@@ -3,6 +3,9 @@ package com.huawei.charging.application.dto;
 import com.huawei.charging.domain.charge.Session;
 import lombok.Data;
 
+/**
+ * 开始通话请求
+ */
 @Data
 public class BeginSessionRequest {
 

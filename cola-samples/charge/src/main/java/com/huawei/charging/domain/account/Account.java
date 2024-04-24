@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * 账户
+ */
 @Data
 @Entity
 @Slf4j
@@ -67,12 +70,18 @@ public class Account {
         }
     }
 
+    /**
+     * 对账户进行计费
+     *
+     * @param ctx 计费上下文
+     * @return 计费记录列表
+     */
     public List<ChargeRecord> charge(ChargeContext ctx) {
         CompositeChargeRule compositeChargeRule = ChargeRuleFactory.get(chargePlanList);
         List<ChargeRecord> chargeRecords = compositeChargeRule.doCharge(ctx);
         log.debug("Charges: "+ chargeRecords);
 
-        //跟新账户系统
+        //更新账户系统
         accountGateway.sync(phoneNo, chargeRecords);
         return chargeRecords;
     }

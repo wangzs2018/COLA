@@ -1,5 +1,8 @@
 package com.huawei.charging.domain.charge.chargeplan;
 
+/**
+ * 基础套餐
+ */
 public class BasicChargePlan extends ChargePlan<BasicChargePlan.BasicChargeFee>{
 
     public BasicChargePlan(){
@@ -23,7 +26,7 @@ public class BasicChargePlan extends ChargePlan<BasicChargePlan.BasicChargeFee>{
         public final int CALLING_PRICE = 5;
 
         /**
-         * 主叫单价。单位是角，4表示0.4元每分钟
+         * 被叫单价。单位是角，4表示0.4元每分钟
          */
         public final int CALLED_PRICE = 4;
     }

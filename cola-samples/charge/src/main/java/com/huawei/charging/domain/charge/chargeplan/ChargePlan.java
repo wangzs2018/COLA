@@ -1,5 +1,9 @@
 package com.huawei.charging.domain.charge.chargeplan;
 
+/**
+ * 计费套餐
+ * @param <T>
+ */
 public abstract class ChargePlan<T extends Resource> implements Comparable<ChargePlan>{
 
     protected int priority;

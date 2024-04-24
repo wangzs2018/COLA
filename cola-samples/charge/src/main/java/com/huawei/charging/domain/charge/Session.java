@@ -5,6 +5,9 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 通话
+ */
 @Data
 public class Session {
     private String sessionId;

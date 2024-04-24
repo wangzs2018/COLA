@@ -2,6 +2,9 @@ package com.huawei.charging.application.dto;
 
 import lombok.Data;
 
+/**
+ * 计费请求
+ */
 @Data
 public class ChargeRequest {
 

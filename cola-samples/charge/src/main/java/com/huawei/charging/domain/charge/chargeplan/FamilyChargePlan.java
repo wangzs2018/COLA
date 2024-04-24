@@ -3,6 +3,9 @@ package com.huawei.charging.domain.charge.chargeplan;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * 家庭套餐
+ */
 public class FamilyChargePlan extends ChargePlan<FamilyChargePlan.FamilyMember> {
 
     public FamilyChargePlan() {

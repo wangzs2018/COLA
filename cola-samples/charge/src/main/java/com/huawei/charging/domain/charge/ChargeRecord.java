@@ -6,6 +6,9 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * 通话记录
+ */
 @Entity
 @Table(name = "charge_record")
 @Data
