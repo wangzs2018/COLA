@@ -4,7 +4,7 @@ import com.alibaba.cola.catchlog.CatchAndLog;
 import com.alibaba.cola.dto.MultiResponse;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
-import com.alibaba.craftsman.api.UserProfileServiceI;
+import com.alibaba.craftsman.api.UserProfileService;
 import com.alibaba.craftsman.command.RefreshScoreCmdExe;
 import com.alibaba.craftsman.command.UserProfileAddCmdExe;
 import com.alibaba.craftsman.command.UserProfileUpdateCmdExe;
@@ -24,7 +24,7 @@ import javax.annotation.Resource;
  */
 @Service
 @CatchAndLog
-public class UserProfileServiceImpl implements UserProfileServiceI{
+public class UserProfileServiceImpl implements UserProfileService {
     @Resource
     private UserProfileAddCmdExe userProfileAddCmdExe;
     @Resource

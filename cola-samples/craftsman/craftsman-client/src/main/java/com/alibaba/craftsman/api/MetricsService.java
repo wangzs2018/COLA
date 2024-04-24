@@ -11,7 +11,7 @@ import com.alibaba.craftsman.dto.clientobject.ATAMetricCO;
  * @author Frank Zhang
  * @date 2019-03-01 10:06 AM
  */
-public interface MetricsServiceI {
+public interface MetricsService {
     Response addATAMetric(ATAMetricAddCmd cmd);
     Response addSharingMetric(SharingMetricAddCmd cmd);
     Response addPatentMetric(PatentMetricAddCmd cmd);

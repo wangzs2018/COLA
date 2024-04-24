@@ -2,7 +2,7 @@ package com.alibaba.craftsman.web;
 
 import com.alibaba.cola.dto.MultiResponse;
 import com.alibaba.cola.dto.Response;
-import com.alibaba.craftsman.api.MetricsServiceI;
+import com.alibaba.craftsman.api.MetricsService;
 import com.alibaba.craftsman.dto.ATAMetricAddCmd;
 import com.alibaba.craftsman.dto.ATAMetricQry;
 import com.alibaba.craftsman.dto.clientobject.ATAMetricCO;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class MetricsController {
 
     @Autowired
-    private MetricsServiceI metricsService;
+    private MetricsService metricsService;
 
     @GetMapping(value = "/metrics/ata")
     public MultiResponse<ATAMetricCO> listATAMetrics(@RequestParam String ownerId){
